@@ -1,0 +1,3251 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e",
+      "resource": {
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "https://rxschedule.example/demo-mrn",
+            "value": "DEMO-1001"
+          },
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "patient-a"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Delaney",
+            "given": [
+              "Marcus"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1958-03-14",
+        "active": true,
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "555-0101",
+            "use": "home"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "100 Sample Lane"
+            ],
+            "city": "Houston",
+            "state": "TX",
+            "postalCode": "77001",
+            "country": "US"
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "M",
+              "display": "Married"
+            }
+          ]
+        },
+        "communication": [
+          {
+            "language": {
+              "text": "English"
+            },
+            "preferred": true
+          }
+        ],
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-a"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:38828693-814d-54e6-b96c-0b288150c307",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Essential hypertension"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-cond-htn"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-cond-htn"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5aa4f0c2-1f7d-5728-94da-824a36bf80ca",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-cond-t2dm"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-cond-t2dm"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:037649ff-3f3a-53ab-a03a-ae59b132a7bb",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Hyperlipidemia"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-cond-lipids"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-cond-lipids"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5a6a4c07-cf9b-5ad3-9881-344d511ce48e",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "text": "No known allergies"
+        },
+        "patient": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "resourceType": "AllergyIntolerance",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-allergy-nka"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "AllergyIntolerance",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-allergy-nka"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ab30f6ed-ee7e-597a-a750-369a6dab5ec3",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "period": {
+          "start": "2026-07-24T04:05:38Z",
+          "end": "2026-07-24T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Diabetes follow-up"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-enc-1"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-enc-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bc76b3d9-f29f-530c-9e6e-74164df31567",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "period": {
+          "start": "2026-11-01T04:05:38Z",
+          "end": "2026-11-01T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Blood pressure check"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-enc-2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-enc-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:53bfd7cc-f4dc-5b93-be8b-9ff2f6b2fb3f",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 142,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 88,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ],
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-old-bp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-old-bp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9aef6459-fe9b-5908-aa89-bfc1d2af62ad",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 76,
+          "unit": "beats/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-old-hr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-old-hr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:647d6bcd-1016-520c-baae-33567b29b089",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 36.7,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-old-temp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-old-temp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e3bbbb4b-e496-556a-aa30-eedf2df01f53",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+          "text": "Respiratory rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 16,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-old-rr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-old-rr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2573c2b3-8bba-5907-9ca2-91c8700043c8",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 97,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-old-spo2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-old-spo2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e3b4024e-6bcf-52a4-b461-389bd8afb0a6",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ],
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-new-bp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-new-bp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:84202195-33ee-5224-88dd-9b7aa24acf35",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 72,
+          "unit": "beats/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-new-hr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-new-hr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:faeb155b-f86b-585f-b246-6edeaf12cf81",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 36.6,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-new-temp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-new-temp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e786fae1-97d6-5435-bbe2-eec50c61df2f",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+          "text": "Respiratory rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 16,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-new-rr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-new-rr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c99bd4aa-ec42-5f32-8ed0-f5225edf569e",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "urn:uuid:5a7ec273-fc42-5b28-a3b7-b4522ca6bd1e"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 98,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-new-spo2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-new-spo2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736",
+      "resource": {
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "https://rxschedule.example/demo-mrn",
+            "value": "DEMO-1002"
+          },
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "patient-b"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Marlowe",
+            "given": [
+              "Evelyn"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1949-09-02",
+        "active": true,
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "555-0102",
+            "use": "home"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "200 Example Road"
+            ],
+            "city": "Sugar Land",
+            "state": "TX",
+            "postalCode": "77478",
+            "country": "US"
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "W",
+              "display": "Widowed"
+            }
+          ]
+        },
+        "communication": [
+          {
+            "language": {
+              "text": "English"
+            },
+            "preferred": true
+          }
+        ],
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c773fa1e-21f9-5558-afb2-ae1d76c36caf",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Essential hypertension"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-cond-htn"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-cond-htn"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:841c68d0-3f2e-5de2-86c8-c383a1edcff4",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Chronic heart failure"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-cond-hf"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-cond-hf"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3856ac61-a3b6-5203-bdb3-b9dbc12cd337",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-cond-t2dm"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-cond-t2dm"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b47bd71f-bc59-56e2-a78e-e3f67ab185fa",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Hypothyroidism"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-cond-thyroid"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-cond-thyroid"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f56b307c-e2e4-50b4-802d-4182b03d8458",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Hyperlipidemia"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-cond-lipids"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-cond-lipids"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d9a8bea6-a2b4-5182-af54-dbb30d5f6c84",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Acute sinusitis"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-cond-sinus"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-cond-sinus"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dbfae8ae-d4b8-5b8c-ab3b-6fea4d8ebb43",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "text": "Penicillin"
+        },
+        "patient": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "type": "allergy",
+        "category": [
+          "medication"
+        ],
+        "criticality": "low",
+        "reaction": [
+          {
+            "manifestation": [
+              {
+                "text": "Rash"
+              }
+            ],
+            "severity": "moderate"
+          }
+        ],
+        "resourceType": "AllergyIntolerance",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-allergy-penicillin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "AllergyIntolerance",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-allergy-penicillin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9374a30e-72ed-5bac-ae92-ad4bbf20f783",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "period": {
+          "start": "2026-06-24T04:05:38Z",
+          "end": "2026-06-24T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Heart failure follow-up"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-enc-1"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-enc-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c249fb62-a1bf-5b64-aad3-86d2ed0e500b",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "period": {
+          "start": "2026-09-22T04:05:38Z",
+          "end": "2026-09-22T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Medication review"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-enc-2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-enc-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ea7a5415-54a0-5797-a0b9-0bf1a14b4e19",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "period": {
+          "start": "2026-11-16T04:05:38Z",
+          "end": "2026-11-16T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Sinus pain and congestion"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-enc-3"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-enc-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0339d1db-945f-5bac-946b-7e2c5b971229",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 150,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 90,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ],
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-old-bp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-old-bp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:318dfbee-671b-5af9-9cbf-978ae41dea8e",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 82,
+          "unit": "beats/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-old-hr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-old-hr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:077cff88-b471-50ec-aebb-83fd97cd27b0",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 36.8,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-old-temp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-old-temp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:099f2482-bb54-5d3e-b374-b08dc1228f39",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+          "text": "Respiratory rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 18,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-old-rr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-old-rr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3e98ed38-b52a-5af4-b6dd-bb41a4385e40",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-old-spo2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-old-spo2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2658c89f-82eb-5b53-a5bb-16c4af4ae216",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 138,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 84,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ],
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-new-bp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-new-bp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:62d5708c-79d0-500e-a2cc-3a7702fc1198",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 78,
+          "unit": "beats/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-new-hr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-new-hr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:54c80784-80b3-5722-a84d-a8a5bdfa94f5",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 37.1,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-new-temp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-new-temp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7861b8cd-5179-5700-bd20-b01b0d543f06",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+          "text": "Respiratory rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 18,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-new-rr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-new-rr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c250198a-8d14-5650-8fb9-86419a7a8401",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "urn:uuid:dfeea5cb-6993-51fb-ae65-a455dda8a736"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 96,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-new-spo2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-new-spo2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8",
+      "resource": {
+        "identifier": [
+          {
+            "type": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                  "code": "MR"
+                }
+              ]
+            },
+            "system": "https://rxschedule.example/demo-mrn",
+            "value": "DEMO-1003"
+          },
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "patient-c"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Raman",
+            "given": [
+              "Priya"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1984-06-21",
+        "active": true,
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "555-0103",
+            "use": "home"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "300 Demo Court"
+            ],
+            "city": "Austin",
+            "state": "TX",
+            "postalCode": "78701",
+            "country": "US"
+          }
+        ],
+        "maritalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+              "code": "S",
+              "display": "Never Married"
+            }
+          ]
+        },
+        "communication": [
+          {
+            "language": {
+              "text": "English"
+            },
+            "preferred": true
+          }
+        ],
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-c"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:89bfa870-5044-5b4a-9576-633e85ce2518",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-cond-t2dm"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-cond-t2dm"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:75e31a34-ac89-5751-b025-2f03c69462ed",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "text": "Obesity"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "recordedDate": "2025-10-17T04:05:38Z",
+        "resourceType": "Condition",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-cond-obesity"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-cond-obesity"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:58750a8d-c215-5f26-955a-fcbc9d87d1ec",
+      "resource": {
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "text": "No known allergies"
+        },
+        "patient": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "resourceType": "AllergyIntolerance",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-allergy-nka"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "AllergyIntolerance",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-allergy-nka"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:687d64be-a5f0-5bda-a2f3-a3705b16198a",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "period": {
+          "start": "2026-08-23T04:05:38Z",
+          "end": "2026-08-23T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Start of tirzepatide therapy"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-enc-1"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-enc-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:00ee4fa5-c0bc-5f12-b84e-b4d1f912264d",
+      "resource": {
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "text": "Office visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "period": {
+          "start": "2026-11-07T04:05:38Z",
+          "end": "2026-11-07T04:35:38Z"
+        },
+        "reasonCode": [
+          {
+            "text": "Dose review and nausea"
+          }
+        ],
+        "resourceType": "Encounter",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-enc-2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-enc-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:081c8441-e97f-5584-9adb-f40ee6185fc6",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 124,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ],
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-old-bp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-old-bp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e8d7160f-7581-57ed-82b6-c69f2e811de5",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 80,
+          "unit": "beats/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-old-hr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-old-hr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:404e4738-b196-5448-b98c-b284cbeb5cd4",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 36.7,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-old-temp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-old-temp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c1267051-93c1-5291-9925-89bde2f3efbd",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+          "text": "Respiratory rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 16,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-old-rr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-old-rr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:379c81da-d62b-5055-84ed-ae5d7b7cfb50",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-08-23T04:05:38Z",
+        "valueQuantity": {
+          "value": 99,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-old-spo2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-old-spo2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6129b1f3-bb38-5b66-9c43-13e2bb517e85",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 76,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ],
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-new-bp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-new-bp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:516756f4-fa93-59c9-90c4-5ada53d53b56",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 76,
+          "unit": "beats/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-new-hr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-new-hr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e5256464-466c-59cb-8c9a-37dfb09776e6",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 36.6,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-new-temp"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-new-temp"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:554c8390-83de-5494-af39-0defebf6fd1d",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "9279-1",
+              "display": "Respiratory rate"
+            }
+          ],
+          "text": "Respiratory rate"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 16,
+          "unit": "breaths/min",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-new-rr"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-new-rr"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:28bc840d-a4bf-5a34-9c05-954015177759",
+      "resource": {
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2708-6",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "urn:uuid:a742e48a-13a1-5ce3-805a-9aa57f882ef8"
+        },
+        "effectiveDateTime": "2026-11-19T04:05:38Z",
+        "valueQuantity": {
+          "value": 99,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "resourceType": "Observation",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-new-spo2"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-new-spo2"
+      }
+    }
+  ]
+}

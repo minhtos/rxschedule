@@ -1,0 +1,1007 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:6df1e2f5-08ac-5c84-8c82-b7fc908d690d",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Metformin hydrochloride 500 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-a"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "type 2 diabetes"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth twice daily with meals",
+            "timing": {
+              "repeat": {
+                "frequency": 2,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "CM",
+                  "CV"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 500,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-metformin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-metformin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:43281cd9-e10f-58c3-8c34-2a112a7c9740",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Atorvastatin 20 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-a"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "high cholesterol"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth at bedtime",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "HS"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 20,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "a-atorvastatin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Ca-atorvastatin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c53dc1e-aa32-5c2d-857b-626164ad4172",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Lisinopril 20 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "high blood pressure"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every morning",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "MORN"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 20,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-lisinopril"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-lisinopril"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:533a5476-637d-517a-af73-1c0629271656",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Amlodipine 5 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "high blood pressure"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every morning",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "MORN"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 5,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-amlodipine"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-amlodipine"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:95c3b682-59ac-5e06-b085-75c8ea2e0c6d",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "24 HR Metoprolol succinate 50 MG Extended Release Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "heart condition"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every morning. Do not crush.",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "MORN"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 50,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-metoprolol"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-metoprolol"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bfa7f1c3-e284-52d8-a4d7-50ce2230ef0d",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Furosemide 20 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "fluid retention"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every morning",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "MORN"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 20,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-furosemide"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-furosemide"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:027cff63-2f1d-5127-a559-393dc0c48a26",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Levothyroxine sodium 0.075 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "underactive thyroid"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every morning, 30 to 60 minutes before breakfast",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "ACM"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 75,
+                  "unit": "mcg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "ug"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-levothyroxine"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-levothyroxine"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4be280e6-5823-5abd-b2b8-96b0d8f93183",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Metformin hydrochloride 1000 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "type 2 diabetes"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth twice daily with meals",
+            "timing": {
+              "repeat": {
+                "frequency": 2,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "CM",
+                  "CV"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 1000,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-metformin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-metformin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0a5d96c9-f70f-56fe-a30a-0c3452ff0a73",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Atorvastatin 40 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "high cholesterol"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth at bedtime",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "HS"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 40,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-atorvastatin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-atorvastatin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e0940ca5-0a00-57cf-bfd7-96612e97ba32",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Amoxicillin 500 MG Oral Capsule"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-b"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "sinus infection"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 capsule by mouth every 8 hours for 10 days",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 8,
+                "periodUnit": "h"
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 500,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "b-amoxicillin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cb-amoxicillin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3509c179-ab05-586b-9fde-1ab2b935f085",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Mounjaro (tirzepatide) 5 MG/0.5ML Pen Injector"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-c"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "type 2 diabetes"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Inject 5 mg under the skin once weekly, on the same day each week",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 1,
+                "periodUnit": "wk",
+                "dayOfWeek": [
+                  "mon"
+                ]
+              }
+            },
+            "route": {
+              "text": "Subcutaneous"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 5,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-tirzepatide"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-tirzepatide"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:38effd03-5534-5ddc-aba6-8b74da7aadad",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Metformin hydrochloride 500 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-c"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "type 2 diabetes"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth twice daily with meals",
+            "timing": {
+              "repeat": {
+                "frequency": 2,
+                "period": 1,
+                "periodUnit": "d",
+                "when": [
+                  "CM",
+                  "CV"
+                ]
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 500,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ]
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-metformin"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-metformin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b2eb1cde-069c-52b4-8efa-36fa68a6c684",
+      "resource": {
+        "status": "active",
+        "intent": "order",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/medicationrequest-category",
+                "code": "community"
+              }
+            ]
+          }
+        ],
+        "medicationCodeableConcept": {
+          "text": "Ondansetron 4 MG Oral Tablet"
+        },
+        "subject": {
+          "reference": "Patient?identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cpatient-c"
+        },
+        "authoredOn": "2026-10-22T04:14:34Z",
+        "reasonCode": [
+          {
+            "text": "nausea"
+          }
+        ],
+        "dosageInstruction": [
+          {
+            "text": "Take 1 tablet by mouth every 8 hours as needed for nausea",
+            "timing": {
+              "repeat": {
+                "frequency": 1,
+                "period": 8,
+                "periodUnit": "h"
+              }
+            },
+            "route": {
+              "text": "Oral"
+            },
+            "doseAndRate": [
+              {
+                "doseQuantity": {
+                  "value": 4,
+                  "unit": "mg",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "mg"
+                }
+              }
+            ],
+            "asNeededCodeableConcept": {
+              "text": "nausea"
+            }
+          }
+        ],
+        "resourceType": "MedicationRequest",
+        "identifier": [
+          {
+            "system": "https://rxschedule.example/demo-seed",
+            "value": "c-ondansetron"
+          }
+        ],
+        "meta": {
+          "tag": [
+            {
+              "system": "https://rxschedule.example/demo-seed",
+              "code": "rxschedule-demo"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "MedicationRequest",
+        "ifNoneExist": "identifier=https%3A%2F%2Frxschedule.example%2Fdemo-seed%7Cc-ondansetron"
+      }
+    }
+  ]
+}
