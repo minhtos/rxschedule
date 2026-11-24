@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 type Patient = {
   id: string;
@@ -166,7 +167,14 @@ export default function Home() {
 
   return (
     <main className="mx-auto max-w-3xl p-8">
-      <h1 className="mb-6 text-2xl font-semibold">Patients</h1>
+     <div className="mb-6 flex items-center justify-between">
+  <h1 className="text-2xl font-semibold">Patients</h1>
+   <Link href="/patients/new" className="rounded border px-4 py-2">
+    New patient
+   </Link>
+  </div>
+
+
 
       <form onSubmit={runSearch} className="flex gap-2">
         <input
@@ -211,6 +219,7 @@ export default function Home() {
                 <th className="py-2 pr-4">Name</th>
                 <th className="py-2 pr-4">Gender</th>
                 <th className="py-2">Date of birth</th>
+                <th className="py-2"></th>
               </tr>
             </thead>
             <tbody>
@@ -224,6 +233,14 @@ export default function Home() {
                   </td>
                   <td className="py-2 pr-4">{p.gender ?? "—"}</td>
                   <td className="py-2">{displayDob(p.birthDate)}</td>
+                  <td className="py-2 pl-4">
+  <Link
+    href={`/patients/${p.id}/edit`}
+    className="underline"
+  >
+    Edit
+  </Link>
+</td>
                 </tr>
               ))}
             </tbody>
