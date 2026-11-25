@@ -226,7 +226,11 @@ export default function Home() {
               {patients.map((p) => (
                 <tr key={p.id} className="border-b">
                   <td className="py-2 pr-4">
-                    <div>{displayName(p)}</div>
+                    <div>
+                      <Link href={`/patients/${p.id}`} className="font-medium underline">
+                      {displayName(p)}
+                      </Link>
+                    </div>
                     <div className="text-sm opacity-70">
                       {displayAddress(p)}
                     </div>

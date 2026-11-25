@@ -121,10 +121,9 @@ export default function NewPatientPage() {
 
   return (
     <main className="mx-auto max-w-3xl p-8">
-        <Link href="/" className="mb-4 inline-block text-sm underline">
+    <Link href="/" className="mb-4 inline-block text-sm underline">
   ← Back to patients
 </Link>
-
       <h1 className="mb-6 text-2xl font-semibold">New patient</h1>
       <p className="mb-4 opacity-80">
         First, search to make sure this patient doesn&apos;t already exist.
@@ -181,7 +180,12 @@ export default function NewPatientPage() {
               </p>
               <ul className="mb-4 list-inside list-disc">
                 {results.map((p) => (
-                  <li key={p.id}>{describe(p)}</li>
+                  <li key={p.id} className="py-1">
+  <Link href={`/patients/${p.id}`} className="underline">
+    {describe(p)}
+  </Link>
+</li>
+
                 ))}
               </ul>
             </>
