@@ -115,6 +115,69 @@ function isFlagged(code: string, value: number, unit: string): boolean {
   return false;
 }
 
+function obsSeries(observations: any[], codes: string[]) {
+  return observations
+    .filter((o) => codes.includes(obsCode(o)))
+    .map((o) => ({
+      date: obsDate(o),
+      value: o?.valueQuantity?.value as number | undefined,
+      unit: o?.valueQuantity?.unit ?? "",
+    }));
+}
+
+function bpSeries(observations: any[]) {
+  return observations
+    .filter((o) => ["85354-9", "55284-4"].includes(obsCode(o)))
+    .map((o) => ({
+      date: obsDate(o),
+      sys: Number(bpPart(o, "8480-6")) || undefined,
+      dia: Number(bpPart(o, "8462-4")) || undefined,
+    }));
+}
+function TrendChart({ lines }: { lines: { color: string; points: number[] }[] }) {
+  const all = lines.flatMap((l) => l.points);
+  if (all.length < 2) {
+    return <p className="text-sm opacity-70">Not enough readings to chart yet.</p>;
+  }
+  const min = Math.min(...all);
+  const max = Math.max(...all);
+  const range = max - min || 1;
+  const W = 600;
+  const H = 160;
+  const PAD = 10;
+  const toPoints = (pts: number[]) =>
+    pts
+      .map(
+        (v, i) =>
+          `${PAD + (i / (pts.length - 1)) * (W - PAD * 2)},${H - PAD - ((v - min) / range) * (H - PAD * 2)}`
+      )
+      .join(" ");
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
+      {lines.map((l, i) => (
+        <polyline key={i} fill="none" stroke={l.color} strokeWidth="2" points={toPoints(l.points)} />
+      ))}
+    </svg>
+  );
+}
+
+function Section({ title, defaultOpen = true, children }: any) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <section className="mt-8">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between text-left"
+      >
+        <h2 className="text-lg font-semibold">{title}</h2>
+        <span className="text-sm opacity-60">{open ? "▾ Hide" : "▸ Show"}</span>
+      </button>
+      {open && children}
+    </section>
+  );
+}
+
 export default function PatientDetailPage({
   params,
 }: {
@@ -146,6 +209,8 @@ function PatientDetailInner({
   const [observations, setObservations] = useState<AnyRes[]>([]);
   const [conditions, setConditions] = useState<any[]>([]);
   const [medRequests, setMedRequests] = useState<any[]>([]);
+  const [openVital, setOpenVital] = useState<string | null>(null);
+  const [trendMode, setTrendMode] = useState<"table" | "graph">("table");
 
   useEffect(() => {
   const obsUrl = `/api/fhir/Observation?patient=${id}&category=vital-signs&_sort=-date&_count=100`;
@@ -205,31 +270,65 @@ const heightO = latestObs(observations, ["8302-2"]);
 const weightO = latestObs(observations, ["29463-7"]);
 const bmiO = latestObs(observations, ["39156-5"]);
 
+const TREND_CODES: Record<string, string[]> = {
+  hr: ["8867-4"],
+  temp: ["8310-5"],
+  rr: ["9279-1"],
+  spo2: ["59408-5", "2708-6"],
+  height: ["8302-2"],
+  weight: ["29463-7"],
+  bmi: ["39156-5"],
+};
+
+const TREND_TITLES: Record<string, string> = {
+  bp: "Blood pressure",
+  hr: "Heart rate",
+  temp: "Temperature",
+  rr: "Resp rate",
+  spo2: "SpO2",
+  height: "Height",
+  weight: "Weight",
+  bmi: "BMI",
+};
+
+const isBp = openVital === "bp";
+const bpRows = isBp ? bpSeries(observations) : [];
+const singleRows =
+  openVital && !isBp ? obsSeries(observations, TREND_CODES[openVital] ?? []) : [];
+const chartLines = isBp
+  ? [
+      { color: "#f87171", points: [...bpRows].reverse().map((r) => r.sys).filter((v): v is number => typeof v === "number") },
+      { color: "#60a5fa", points: [...bpRows].reverse().map((r) => r.dia).filter((v): v is number => typeof v === "number") },
+    ]
+  : [
+      { color: "#7dd3fc", points: [...singleRows].reverse().map((r) => r.value).filter((v): v is number => typeof v === "number") },
+    ];
+
 let bmi = bmiO ? obsValue(bmiO) : "—";
 if (!bmiO && heightO?.valueQuantity && weightO?.valueQuantity) {
   const m = heightO.valueQuantity.value / 100;
   bmi = (weightO.valueQuantity.value / (m * m)).toFixed(1) + " kg/m2 (calc)";
 }
 
-function tile(label: string, o: any, value: string, flagged: boolean) {
-  return { label, value, date: o ? obsDate(o) : "", flagged };
+function tile(label: string, o: any, value: string, flagged: boolean,vitalKey: string) {
+  return { label, value, date: o ? obsDate(o) : "", flagged, key: vitalKey };
 }
 
 const tiles = [
   tile("Blood pressure", bp,
     bp ? `${bpPart(bp, "8480-6")} / ${bpPart(bp, "8462-4")} mmHg` : "—",
-    bp ? Number(bpPart(bp, "8480-6")) >= 140 || Number(bpPart(bp, "8462-4")) >= 90 : false),
+    bp ? Number(bpPart(bp, "8480-6")) >= 140 || Number(bpPart(bp, "8462-4")) >= 90 : false, "bp"),
   tile("Heart rate", hr, hr ? obsValue(hr) : "—",
-    hr?.valueQuantity ? isFlagged("8867-4", hr.valueQuantity.value, hr.valueQuantity.unit ?? "") : false),
+    hr?.valueQuantity ? isFlagged("8867-4", hr.valueQuantity.value, hr.valueQuantity.unit ?? "") : false, "hr"),
   tile("Temperature", temp, temp ? obsValue(temp) : "—",
-    temp?.valueQuantity ? isFlagged("8310-5", temp.valueQuantity.value, temp.valueQuantity.unit ?? "") : false),
+    temp?.valueQuantity ? isFlagged("8310-5", temp.valueQuantity.value, temp.valueQuantity.unit ?? "") : false, "temp"),
   tile("Resp. rate", rr, rr ? obsValue(rr) : "—",
-    rr?.valueQuantity ? isFlagged("9279-1", rr.valueQuantity.value, rr.valueQuantity.unit ?? "") : false),
+    rr?.valueQuantity ? isFlagged("9279-1", rr.valueQuantity.value, rr.valueQuantity.unit ?? "") : false, "rr"),
   tile("SpO2", spo2, spo2 ? obsValue(spo2) : "—",
-    spo2?.valueQuantity ? isFlagged("2708-6", spo2.valueQuantity.value, spo2.valueQuantity.unit ?? "") : false),
-  tile("Height", heightO, heightO ? obsValue(heightO) : "—", false),
-  tile("Weight", weightO, weightO ? obsValue(weightO) : "—", false),
-  tile("BMI", bmiO ?? heightO, bmi, false),
+    spo2?.valueQuantity ? isFlagged("2708-6", spo2.valueQuantity.value, spo2.valueQuantity.unit ?? "") : false, "spo2"),
+  tile("Height", heightO, heightO ? obsValue(heightO) : "—", false, "height"),
+  tile("Weight", weightO, weightO ? obsValue(weightO) : "—", false, "weight"),
+  tile("BMI", bmiO ?? heightO, bmi, false, "bmi"),
 ];
 
   return (
@@ -276,11 +375,10 @@ const tiles = [
   </div>
 )}
       </div>
-      <section className="mt-8">
-  <h2 className="text-lg font-semibold">Vitals</h2>
+      <Section title="Vitals">
   <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
     {tiles.map((t) => (
-      <div key={t.label} className="rounded border border-neutral-700 p-3">
+      <div key={t.label} onClick={() => setOpenVital(openVital === t.key ? null : t.key)} className="cursor-pointer rounded border border-neutral-700 p-3">
         <div className="text-xs uppercase tracking-wide opacity-60">{t.label}</div>
         <div className={`mt-1 text-lg font-medium ${t.flagged ? "text-red-400" : ""}`}>
           {t.value}{t.flagged ? " ⚠" : ""}
@@ -289,9 +387,33 @@ const tiles = [
       </div>
     ))}
   </div>
-</section>
-      <section className="mt-8">
-  <h2 className="mb-3 text-lg font-semibold">Past visits</h2>
+
+  {openVital && (
+  <div className="mt-4 rounded border border-neutral-700 p-4">
+    <div className="mb-3 flex items-center gap-2">
+      <span className="font-semibold">{TREND_TITLES[openVital]}</span>
+      <button type="button" onClick={() => setTrendMode("table")} className={`rounded border px-2 py-1 text-sm ${trendMode === "table" ? "bg-neutral-700" : ""}`}>Table</button>
+      <button type="button" onClick={() => setTrendMode("graph")} className={`rounded border px-2 py-1 text-sm ${trendMode === "graph" ? "bg-neutral-700" : ""}`}>Graph</button>
+    </div>
+    {(isBp ? bpRows.length : singleRows.length) === 0 ? (
+      <p className="text-sm opacity-70">No readings recorded.</p>
+    ) : trendMode === "table" ? (
+      <ul className="space-y-1 text-sm">
+        {(isBp ? bpRows : singleRows).map((r: any, i: number) => (
+          <li key={i} className="flex justify-between border-b border-neutral-800 py-1">
+            <span>{r.date}</span>
+            <span>{isBp ? `${r.sys ?? "—"} / ${r.dia ?? "—"} mmHg` : `${r.value ?? "—"} ${r.unit ?? ""}`}</span>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <TrendChart lines={chartLines} />
+    )}
+    
+  </div>
+)}
+</Section>
+      <Section title="Past visits">
   {encounters.length === 0 && (
     <p className="opacity-70">No visits on file.</p>
   )}
@@ -315,10 +437,9 @@ const tiles = [
       </li>
     ))}
   </ul>
-</section>
-<section className="mt-8">
-  <h2 className="text-lg font-semibold">Conditions</h2>
-  {visibleConditions.length === 0 ? (
+</Section>
+<Section title="Conditions">
+    {visibleConditions.length === 0 ? (
     <p className="mt-2 opacity-70">No active conditions on file.</p>
   ) : (
     <ul className="mt-3 space-y-2">
@@ -332,11 +453,10 @@ const tiles = [
       ))}
     </ul>
   )}
-</section>
+</Section>
 
-<section className="mt-8">
-  <h2 className="text-lg font-semibold">Medications</h2>
-  {activeMeds.length === 0 ? (
+<Section title="Medications">
+    {activeMeds.length === 0 ? (
     <p className="mt-2 opacity-70">No active medications.</p>
   ) : (
     <ul className="mt-3 space-y-2">
@@ -348,10 +468,9 @@ const tiles = [
       ))}
     </ul>
   )}
-</section>
+</Section>
 
-<section className="mt-8">
-  <h2 className="text-lg font-semibold">Medication history</h2>
+<Section title="Medication history" defaultOpen={false}>
   {medRequests.length === 0 ? (
     <p className="mt-2 opacity-70">No medication history.</p>
   ) : (
@@ -372,7 +491,7 @@ const tiles = [
       ))}
     </ul>
   )}
-</section>
+</Section>
 </main>
   );
 }
