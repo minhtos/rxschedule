@@ -134,8 +134,11 @@ function bpSeries(observations: any[]) {
       dia: Number(bpPart(o, "8462-4")) || undefined,
     }));
 }
-function TrendChart({ lines }: { lines: { color: string; points: number[] }[] }) {
-  const all = lines.flatMap((l) => l.points);
+
+type ChartPoint = { date: string; value: number };
+
+function TrendChart({ lines }: { lines: { color: string; unit: string; points: ChartPoint[] }[] }) {
+  const all = lines.flatMap((l) => l.points.map((p) => p.value));
   if (all.length < 2) {
     return <p className="text-sm opacity-70">Not enough readings to chart yet.</p>;
   }
@@ -144,18 +147,25 @@ function TrendChart({ lines }: { lines: { color: string; points: number[] }[] })
   const range = max - min || 1;
   const W = 600;
   const H = 160;
-  const PAD = 10;
-  const toPoints = (pts: number[]) =>
-    pts
-      .map(
-        (v, i) =>
-          `${PAD + (i / (pts.length - 1)) * (W - PAD * 2)},${H - PAD - ((v - min) / range) * (H - PAD * 2)}`
-      )
-      .join(" ");
+  const PAD = 14;
+  const x = (i: number, n: number) => PAD + (i / Math.max(n - 1, 1)) * (W - PAD * 2);
+  const y = (v: number) => H - PAD - ((v - min) / range) * (H - PAD * 2);
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
-      {lines.map((l, i) => (
-        <polyline key={i} fill="none" stroke={l.color} strokeWidth="2" points={toPoints(l.points)} />
+      {lines.map((l, li) => (
+        <g key={li}>
+          <polyline
+            fill="none"
+            stroke={l.color}
+            strokeWidth="2"
+            points={l.points.map((p, i) => `${x(i, l.points.length)},${y(p.value)}`).join(" ")}
+          />
+          {l.points.map((p, i) => (
+            <circle key={i} cx={x(i, l.points.length)} cy={y(p.value)} r="5" fill={l.color} className="cursor-pointer">
+              <title>{`${p.date} — ${p.value} ${l.unit}`}</title>
+            </circle>
+          ))}
+        </g>
       ))}
     </svg>
   );
@@ -297,11 +307,23 @@ const singleRows =
   openVital && !isBp ? obsSeries(observations, TREND_CODES[openVital] ?? []) : [];
 const chartLines = isBp
   ? [
-      { color: "#f87171", points: [...bpRows].reverse().map((r) => r.sys).filter((v): v is number => typeof v === "number") },
-      { color: "#60a5fa", points: [...bpRows].reverse().map((r) => r.dia).filter((v): v is number => typeof v === "number") },
+      {
+        color: "#f87171",
+        unit: "mmHg",
+        points: [...bpRows].reverse().filter((r) => typeof r.sys === "number").map((r) => ({ date: r.date, value: r.sys as number })),
+      },
+      {
+        color: "#60a5fa",
+        unit: "mmHg",
+        points: [...bpRows].reverse().filter((r) => typeof r.dia === "number").map((r) => ({ date: r.date, value: r.dia as number })),
+      },
     ]
   : [
-      { color: "#7dd3fc", points: [...singleRows].reverse().map((r) => r.value).filter((v): v is number => typeof v === "number") },
+      {
+        color: "#7dd3fc",
+        unit: singleRows[0]?.unit ?? "",
+        points: [...singleRows].reverse().filter((r) => typeof r.value === "number").map((r) => ({ date: r.date, value: r.value as number })),
+      },
     ];
 
 let bmi = bmiO ? obsValue(bmiO) : "—";
@@ -350,12 +372,10 @@ const tiles = [
   </p>
 )}
           </div>
-          <Link
-            href={`/patients/${id}/edit`}
-            className="rounded border px-4 py-2"
-          >
-            Edit
-          </Link>
+          <div className="flex gap-2">
+  <Link href={`/patients/${id}/order`} className="rounded border px-4 py-2">New order</Link>
+  <Link href={`/patients/${id}/edit`} className="rounded border px-4 py-2">Edit</Link>
+</div>
         </div>
         {realAllergies.length > 0 && (
           <div className="mt-4 rounded border border-red-500 bg-red-950 px-4 py-3 text-red-100">
@@ -409,7 +429,7 @@ const tiles = [
     ) : (
       <TrendChart lines={chartLines} />
     )}
-    
+
   </div>
 )}
 </Section>
