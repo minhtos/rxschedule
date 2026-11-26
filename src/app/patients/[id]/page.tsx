@@ -40,8 +40,35 @@ function allergyLabel(a: AnyRes): string {
     ? `${substance} — ${reaction}${crit}`
     : `${substance}${crit}`;
 }
+
 function isNkda(a: any): boolean {
-  return (a?.code?.coding ?? []).some((c: any) => c.code === "409137002");
+  const codings = a?.code?.coding ?? [];
+  if (codings.some((c: any) => c.code === "409137002" || c.code === "716186003")) {
+    return true;
+  }
+  const label = (a?.code?.text ?? codings[0]?.display ?? "").toLowerCase();
+  return label.includes("no known allerg");
+}
+
+function conditionLabel(c: any): string {
+  return c?.code?.coding?.[0]?.display ?? c?.code?.text ?? "Condition";
+}
+
+function conditionOnset(c: any): string {
+  const d = c?.onsetDateTime ?? c?.recordedDate;
+  return d ? displayDob(String(d).slice(0, 10)) : "";
+}
+
+function medLabel(m: any): string {
+  const cc = m?.medicationCodeableConcept;
+  if (cc) return cc.coding?.[0]?.display ?? cc.text ?? "Medication";
+  const ref = m?.medicationReference;
+  if (ref) return ref.display ?? "Medication";
+  return "Medication";
+}
+
+function medSig(m: any): string {
+  return m?.dosageInstruction?.[0]?.text ?? "";
 }
 
 function patientPhone(p: any): string {
@@ -117,9 +144,13 @@ function PatientDetailInner({
   const [error, setError] = useState<string | null>(null);
   const [encounters, setEncounters] = useState<AnyRes[]>([]);
   const [observations, setObservations] = useState<AnyRes[]>([]);
+  const [conditions, setConditions] = useState<any[]>([]);
+  const [medRequests, setMedRequests] = useState<any[]>([]);
 
   useEffect(() => {
   const obsUrl = `/api/fhir/Observation?patient=${id}&category=vital-signs&_sort=-date&_count=100`;
+  const condUrl = `/api/fhir/Condition?patient=${id}&clinical-status=active&_count=100`;
+  const medUrl = `/api/fhir/MedicationRequest?patient=${id}&_sort=-authoredon&_count=100`;
   Promise.all([
     fetch(`/api/fhir/Patient/${id}`).then((r) => {
       if (!r.ok) throw new Error(`Patient: FHIR server said ${r.status}`);
@@ -132,12 +163,16 @@ function PatientDetailInner({
       r.ok ? r.json() : { entry: [] }
     ),
     fetch(obsUrl).then((r) => (r.ok ? r.json() : { entry: [] })),
+    fetch(condUrl).then((r) => (r.ok ? r.json() : { entry: [] })),
+    fetch(medUrl).then((r) => (r.ok ? r.json() : { entry: [] })),
   ])
-    .then(([p, ab, eb, ob]) => {
+    .then(([p, ab, eb, ob, cb, mb]) => {
       setPatient(p);
       setAllergies((ab.entry ?? []).map((e: AnyRes) => e.resource));
       setEncounters((eb.entry ?? []).map((e: AnyRes) => e.resource));
       setObservations((ob.entry ?? []).map((e: AnyRes) => e.resource));
+      setConditions((cb.entry ?? []).map((e: AnyRes) => e.resource));
+      setMedRequests((mb.entry ?? []).map((e: AnyRes) => e.resource));
     })
     .catch((e) => setError(e.message));
 }, [id]);
@@ -156,6 +191,11 @@ function PatientDetailInner({
     );
 const realAllergies = allergies.filter((a) => !isNkda(a));
 const hasNkda = allergies.some(isNkda);
+const visibleConditions = conditions.filter((c) => {
+  const v = c?.verificationStatus?.coding?.[0]?.code;
+  return v !== "refuted" && v !== "entered-in-error";
+});
+const activeMeds = medRequests.filter((m) => m.status === "active");
 const bp = latestObs(observations, ["85354-9", "55284-4"]);
 const hr = latestObs(observations, ["8867-4"]);
 const temp = latestObs(observations, ["8310-5"]);
@@ -276,7 +316,63 @@ const tiles = [
     ))}
   </ul>
 </section>
-<p className="mt-8 opacity-70">Conditions and medications land here in Session 6.</p>
+<section className="mt-8">
+  <h2 className="text-lg font-semibold">Conditions</h2>
+  {visibleConditions.length === 0 ? (
+    <p className="mt-2 opacity-70">No active conditions on file.</p>
+  ) : (
+    <ul className="mt-3 space-y-2">
+      {visibleConditions.map((c) => (
+        <li key={c.id} className="rounded border border-neutral-700 p-3">
+          {conditionLabel(c)}
+          {conditionOnset(c) && (
+            <span className="opacity-60"> · since {conditionOnset(c)}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
+
+<section className="mt-8">
+  <h2 className="text-lg font-semibold">Medications</h2>
+  {activeMeds.length === 0 ? (
+    <p className="mt-2 opacity-70">No active medications.</p>
+  ) : (
+    <ul className="mt-3 space-y-2">
+      {activeMeds.map((m) => (
+        <li key={m.id} className="rounded border border-neutral-700 p-3">
+          <div>{medLabel(m)}</div>
+          {medSig(m) && <div className="text-sm opacity-70">{medSig(m)}</div>}
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
+
+<section className="mt-8">
+  <h2 className="text-lg font-semibold">Medication history</h2>
+  {medRequests.length === 0 ? (
+    <p className="mt-2 opacity-70">No medication history.</p>
+  ) : (
+    <ul className="mt-3 space-y-2">
+      {medRequests.map((m) => (
+        <li key={m.id} className="rounded border border-neutral-700 p-3">
+          <div>
+            {medLabel(m)}
+            <span className="ml-2 rounded border px-2 py-0.5 text-xs uppercase">
+              {m.status ?? "unknown"}
+            </span>
+          </div>
+          <div className="text-sm opacity-70">
+            {m.authoredOn ? `Ordered ${displayDob(m.authoredOn.slice(0, 10))}` : ""}
+            {medSig(m) ? ` · ${medSig(m)}` : ""}
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
 </main>
   );
 }
