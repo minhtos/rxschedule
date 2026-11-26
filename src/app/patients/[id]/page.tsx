@@ -40,6 +40,21 @@ function allergyLabel(a: AnyRes): string {
     ? `${substance} — ${reaction}${crit}`
     : `${substance}${crit}`;
 }
+function isNkda(a: any): boolean {
+  return (a?.code?.coding ?? []).some((c: any) => c.code === "409137002");
+}
+
+function patientPhone(p: any): string {
+  const t = (p?.telecom ?? []).find((x: any) => x.system === "phone");
+  return t?.value ?? "";
+}
+
+function patientAddress(p: any): string {
+  const a = p?.address?.[0];
+  if (!a) return "";
+  const street = (a.line ?? []).join(" ");
+  return [street, a.city, a.state, a.postalCode].filter(Boolean).join(", ");
+}
 
 function obsCode(o: any): string {
   return o?.code?.coding?.[0]?.code ?? "";
@@ -139,7 +154,8 @@ function PatientDetailInner({
         <p>Loading…</p>
       </main>
     );
-
+const realAllergies = allergies.filter((a) => !isNkda(a));
+const hasNkda = allergies.some(isNkda);
 const bp = latestObs(observations, ["85354-9", "55284-4"]);
 const hr = latestObs(observations, ["8867-4"]);
 const temp = latestObs(observations, ["8310-5"]);
@@ -185,10 +201,15 @@ const tiles = [
         <div className="flex items-start justify-between">
           <div>
             <h1 className="text-2xl font-semibold">{displayName(patient)}</h1>
-            <p className="mt-1 text-sm opacity-80">
-              {ageFrom(patient.birthDate)} · {patient.gender ?? ""} · DOB{" "}
-              {displayDob(patient.birthDate)}
-            </p>
+<p className="mt-1 text-sm opacity-80">
+  {ageFrom(patient.birthDate)} · {patient.gender ?? ""} · DOB{" "}
+  {displayDob(patient.birthDate)}
+</p>
+{(patientPhone(patient) || patientAddress(patient)) && (
+  <p className="mt-1 text-sm opacity-80">
+    {[patientPhone(patient), patientAddress(patient)].filter(Boolean).join(" · ")}
+  </p>
+)}
           </div>
           <Link
             href={`/patients/${id}/edit`}
@@ -197,13 +218,38 @@ const tiles = [
             Edit
           </Link>
         </div>
-        {allergies.length > 0 && (
+        {realAllergies.length > 0 && (
           <div className="mt-4 rounded border border-red-500 bg-red-950 px-4 py-3 text-red-100">
             <strong>⚠ Allergies:</strong>{" "}
-            {allergies.map(allergyLabel).join(" · ")}
+            {realAllergies.map(allergyLabel).join(" · ")}
           </div>
         )}
+        {realAllergies.length === 0 && hasNkda && (
+  <div className="mt-4 rounded border border-slate-300 bg-slate-50 px-4 py-3 text-slate-600">
+    ✓ No known allergies — documented
+  </div>
+)}
+
+{allergies.length === 0 && (
+  <div className="mt-4 rounded border border-dashed border-amber-500 bg-amber-50 px-4 py-3 text-amber-800">
+    ⚠ Allergies not recorded — verify before prescribing
+  </div>
+)}
       </div>
+      <section className="mt-8">
+  <h2 className="text-lg font-semibold">Vitals</h2>
+  <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
+    {tiles.map((t) => (
+      <div key={t.label} className="rounded border border-neutral-700 p-3">
+        <div className="text-xs uppercase tracking-wide opacity-60">{t.label}</div>
+        <div className={`mt-1 text-lg font-medium ${t.flagged ? "text-red-400" : ""}`}>
+          {t.value}{t.flagged ? " ⚠" : ""}
+        </div>
+        <div className="text-xs opacity-50">{t.date}</div>
+      </div>
+    ))}
+  </div>
+</section>
       <section className="mt-8">
   <h2 className="mb-3 text-lg font-semibold">Past visits</h2>
   {encounters.length === 0 && (
@@ -229,20 +275,6 @@ const tiles = [
       </li>
     ))}
   </ul>
-</section>
-    <section className="mt-8">
-  <h2 className="text-lg font-semibold">Vitals</h2>
-  <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
-    {tiles.map((t) => (
-      <div key={t.label} className="rounded border border-neutral-700 p-3">
-        <div className="text-xs uppercase tracking-wide opacity-60">{t.label}</div>
-        <div className={`mt-1 text-lg font-medium ${t.flagged ? "text-red-400" : ""}`}>
-          {t.value}{t.flagged ? " ⚠" : ""}
-        </div>
-        <div className="text-xs opacity-50">{t.date}</div>
-      </div>
-    ))}
-  </div>
 </section>
 <p className="mt-8 opacity-70">Conditions and medications land here in Session 6.</p>
 </main>
