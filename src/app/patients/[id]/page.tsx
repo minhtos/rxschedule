@@ -373,7 +373,7 @@ const tiles = [
 )}
           </div>
           <div className="flex gap-2">
-  <Link href={`/patients/${id}/order`} className="rounded border px-4 py-2">New order</Link>
+  <a href={`/patients/${id}/order`} className="rounded border px-4 py-2">New order</a>
   <Link href={`/patients/${id}/edit`} className="rounded border px-4 py-2">Edit</Link>
 </div>
         </div>
