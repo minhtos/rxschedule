@@ -20,6 +20,7 @@ type OrderDraft = {
   rxDisplay?: string;
   rxIngredients?: string[];
   customDirections?: string;
+  modifier?: string;
 };
 
 const EMPTY_DRAFT: OrderDraft = {
@@ -67,6 +68,8 @@ const TIME_PHRASES: Record<string, string> = {
 function sigPreview(d: OrderDraft): string {
   const unit = d.form === "liquid" ? "mL" : d.form;
   if (!d.drugName) return "Start by choosing a medication.";
+  const intervalH = /^Q(\d+)H$/.exec(d.frequency || "")?.[1];
+  if (intervalH) return `Take ${d.doseQty || "?"} ${unit}${unit !== "mL" && Number(d.doseQty) > 1 ? "s" : ""} ${d.route} every ${intervalH} hours${d.modifier ? `, ${d.modifier}` : ""}.`;
   const take = `Take ${d.doseQty || "?"} ${unit}${unit !== "mL" && Number(d.doseQty) > 1 ? "s" : ""} ${d.route}`;
   if (d.frequency === "PRN") {
     return `${take} as needed${d.prnReason ? ` for ${d.prnReason}` : ""}.`;
@@ -78,7 +81,16 @@ function sigPreview(d: OrderDraft): string {
     phrases.length === 1
       ? phrases[0]
       : `${phrases.slice(0, -1).join(", ")} and ${phrases[phrases.length - 1]}`;
-  return `${take} ${when}.`;
+  return `${take} ${when}${d.modifier ? `, ${d.modifier}` : ""}.`;
+}
+
+const MEAL_CODES: Record<string, string> = { "with meals": "C", "before meals": "AC", "on an empty stomach": "AC" };
+
+function buildRepeat(d: OrderDraft) {
+  const intervalH = /^Q(\d+)H$/.exec(d.frequency || "")?.[1];
+  if (intervalH) return { frequency: 1, period: Number(intervalH), periodUnit: "h" };
+  const meal = d.modifier ? MEAL_CODES[d.modifier] : undefined;
+  return { when: meal ? [...d.times, meal] : d.times };
 }
 
 function buildMedicationRequest(d: OrderDraft, patientId: string) {
@@ -104,7 +116,7 @@ function buildMedicationRequest(d: OrderDraft, patientId: string) {
     dosageInstruction: [
       {
         text: sigPreview(d),
-        timing: { repeat: { when: d.times } },
+        timing: { repeat: buildRepeat(d) },
         route: { text: d.route },
         doseAndRate: [
           { doseQuantity: { value: Number(d.doseQty) || 1, unit: d.form === "liquid" ? "mL" : d.form } },
@@ -112,7 +124,7 @@ function buildMedicationRequest(d: OrderDraft, patientId: string) {
       },
     ],
     dispenseRequest: {
-      quantity: { value: Number(d.dispenseQty) || 0, unit: d.form },
+      quantity: { value: Number(d.dispenseQty) || 0, unit: d.form === "liquid" ? "mL" : d.form },
       numberOfRepeatsAllowed: Number(d.refills) || 0,
     },
   };
@@ -161,13 +173,13 @@ function parseSig(raw: string): SigParse {
   tokens.forEach((tok, i) => {
     if (tok === "prn") { prnAt = i; out.frequency = "PRN"; return; }
     if (prnAt >= 0) return;
-    const glued = tok.match(/^(\d+(?:\.\d+)?(?:-\d+(?:\.\d+)?)?)([a-z]+)$/);
+    const glued = tok.match(/^(\d+(?:\.\d+)?(?:-\d+(?:\.\d+)?)?)([a-z]+\d*[a-z]*)$/);
     const word = glued ? glued[2] : tok;
     if (glued) out.doseQty = glued[1];
     else if (/^\d+(?:\.\d+)?(-\d+(?:\.\d+)?)?$/.test(tok)) { out.doseQty = tok; return; }
     if (SIG_UNITS[word]) { out.form = SIG_UNITS[word]; return; }
     if (SIG_FREQS.includes(word.toUpperCase())) { out.frequency = word.toUpperCase(); return; }
-    if (/^q\d+h$/.test(word)) { out.unknown.push(tok + " (interval — use Freeform)"); return; }
+    if (/^q\d+h$/.test(word)) { out.frequency = word.toUpperCase(); return; }
     out.unknown.push(tok);
   });
   if (prnAt >= 0) out.prnReason = tokens.slice(prnAt + 1).join(" ");
@@ -520,7 +532,7 @@ const rowBtn = (info: ScdInfo) => (
   ? checkAllergy(draft.rxIngredients, realAllergies)
   : null;
 
-const PER_DAY: Record<string, number> = { QD: 1, QHS: 1, BID: 2, TID: 3, QID: 4, QOD: 0.5 };
+const PER_DAY: Record<string, number> = { QD: 1, QHS: 1, BID: 2, TID: 3, QID: 4, QOD: 0.5, Q4H: 6, Q6H: 4, Q8H: 3, Q12H: 2};
 const doseN = Number(draft.doseQty);
 const dispN = Number(draft.dispenseQty);
 const perDay = PER_DAY[draft.frequency] ?? 0;
@@ -539,7 +551,9 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
     <main className="mx-auto max-w-3xl p-6">
       <Link href={`/patients/${id}`} className="text-sm underline">← Back to chart</Link>
       <h1 className="mt-3 text-2xl font-bold">New order</h1>
-      <p className="mt-1 opacity-80">{name} · DOB {fmtDob(patient.birthDate)}</p>
+      <p className="mt-1 opacity-80">{name} · DOB {fmtDob(patient.birthDate)}
+        · Order date {fmtDob(todayLocal())}
+      </p>
       {realAllergies.length > 0 ? (
         <p className="mt-3 rounded border border-red-500 bg-red-950 px-3 py-2 text-red-200">
           ⚠ Allergies: {realAllergies.map((a) => allergyLabelA(a)).join(", ")}
@@ -694,7 +708,10 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
         <div className="sm:col-span-4">
   <div className="flex items-center justify-between">
   <label className={labelCls}>Sig</label>
-  <button type="button" className="text-xs underline" onClick={() => setFreeform((f) => !f)}>{freeform ? "Use structured sig" : "Freeform"}</button>
+  <div className="flex gap-1">
+  <button type="button" onClick={() => setFreeform(false)} className={`rounded border px-3 py-1 text-sm ${!freeform ? "bg-white text-black" : ""}`}>Structured</button>
+  <button type="button" onClick={() => setFreeform(true)} className={`rounded border px-3 py-1 text-sm ${freeform ? "bg-white text-black" : ""}`}>Freeform</button>
+</div>
   </div>
   <input className={inputCls} value={sigText} disabled={freeform} placeholder="e.g. 1 cap tid — or tap the helpers below" onChange={(e) => applySig(e.target.value)} />
   <p className="mt-1 text-xs opacity-70">Reads as: {[draft.doseQty, draft.form, draft.frequency === "PRN" ? `PRN ${draft.prnReason}`.trim() : draft.frequency].filter(Boolean).join(" ") || "—"}</p>
@@ -719,7 +736,7 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
       <div className="mt-5">
         <span className={labelCls}>Frequency</span>
         <div className="flex flex-wrap gap-2">
-          {["QD", "QHS", "BID", "TID", "QID", "QOD", "QW", "PRN", "ONCE"].map((code) => (
+          {["QD", "QHS", "BID", "TID", "QID", "QOD", "QW", "PRN", "Q4H", "Q6H", "Q8H", "Q12H", "ONCE"].map((code) => (
             <button key={code} type="button" onClick={() => pickFrequency(code)} className={`rounded border px-3 py-1 text-sm ${draft.frequency === code ? "bg-neutral-700" : ""}`}>
               {code}
             </button>
@@ -727,7 +744,7 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
         </div>
       </div>
 
-      {draft.frequency !== "PRN" && draft.frequency !== "ONCE" && draft.frequency !== "" && (
+      {draft.frequency !== "PRN" && draft.frequency !== "ONCE" && draft.frequency !== "" && !/^Q\d+H$/.test(draft.frequency) && (
         <div className="mt-4">
           <span className={labelCls}>Times of day</span>
           <div className="flex flex-wrap gap-2">
@@ -747,6 +764,14 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
         </div>
       )}
 
+      <div className="sm:col-span-4">
+          <label className="text-sm opacity-80">Meal timing</label>
+        <div className="mt-1 flex flex-wrap gap-2">
+          {[["", "None"], ["with meals", "With meals"], ["before meals", "Before meals"], ["on an empty stomach", "On an empty stomach"]].map(([value, label]) => (
+      <button key={label} type="button" onClick={() => set({ modifier: value })} className={`rounded border px-3 py-1 text-sm ${(draft.modifier ?? "") === value ? "bg-white text-black" : ""}`}>{label}</button>))}
+        </div>
+      </div>
+
       <div className="mt-4">
         <label className={labelCls}>Notes for the patient</label>
         <input className={inputCls} value={draft.notes} onChange={(e) => set({ notes: e.target.value })} placeholder="e.g. Take with food" />
@@ -761,6 +786,7 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
       <div className="mt-6 rounded border bg-white p-4 text-black shadow">
   <p className="text-xs uppercase tracking-wide text-gray-500">Pharmacy label preview</p>
   <p className="mt-1 font-semibold">{patient.name?.[0]?.family}, {patient.name?.[0]?.given?.join(" ")}</p>
+  <p className="text-sm">Written: {fmtDob(todayLocal())}</p>
   <p className="font-semibold">{draft.rxDisplay ?? `${draft.drugName} ${draft.strength}`.trim()}</p>
   <p className="text-sm">Qty: {draft.dispenseQty || "—"} {unitWord}</p>
   <p className="mt-1">{freeform && draft.customDirections?.trim() ? draft.customDirections : sigPreview(draft)}</p>
