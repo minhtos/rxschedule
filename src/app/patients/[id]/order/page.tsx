@@ -609,8 +609,14 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
       </>
     ) : filtered.singles.length === 0 && filtered.combos.length === 0 ? (
       <p className="px-3 py-2 text-sm">
-        No {distinctIngs[0]?.name ?? "drug"} products match that strength.
-        {filtered.available.length > 0 && <> Available strengths: {filtered.available.join(", ")}</>}
+        {distinctIngs.length === 0 ? (
+  <>No drug matches "{parsed.drugText}" — keep typing, or try the full drug name.</>
+) : (
+  <>
+    No {distinctIngs[0]?.name ?? "drug"} products match that strength.
+    {filtered.available.length > 0 && <> Available strengths: {filtered.available.join(", ")}</>}
+  </>
+)}
       </p>
     ) : (
       <>
