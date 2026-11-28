@@ -71,6 +71,29 @@ function medSig(m: any): string {
   return m?.dosageInstruction?.[0]?.text ?? "";
 }
 
+function medTiming(mr: any) {
+  return mr?.dosageInstruction?.[0]?.timing?.repeat ?? {};
+}
+
+function medWhen(mr: any): string[] {
+  return medTiming(mr)?.when ?? [];
+}
+
+function medDose(mr: any): string {
+  const dq = mr?.dosageInstruction?.[0]?.doseAndRate?.[0]?.doseQuantity;
+  if (!dq?.value) return "✓";
+  return `✓ ${dq.value} ${dq.unit ?? ""}`.trim();
+}
+
+const DAY_SLOTS = ["MORN", "NOON", "EVE", "HS"];
+function isGridMed(mr: any): boolean {
+  return medWhen(mr).some((w: string) => DAY_SLOTS.includes(w));
+}
+
+function isWeeklyMed(mr: any): boolean {
+  return (medTiming(mr)?.dayOfWeek?.length ?? 0) > 0;
+}
+
 function patientPhone(p: any): string {
   const t = (p?.telecom ?? []).find((x: any) => x.system === "phone");
   return t?.value ?? "";
@@ -271,6 +294,14 @@ const visibleConditions = conditions.filter((c) => {
   return v !== "refuted" && v !== "entered-in-error";
 });
 const activeMeds = medRequests.filter((m) => m.status === "active");
+const gridMeds = activeMeds.filter(isGridMed);
+const weeklyMeds = activeMeds.filter((m) => !isGridMed(m) && isWeeklyMed(m));
+const otherMeds = activeMeds.filter((m) => !isGridMed(m) && !isWeeklyMed(m));
+const anyTiming = activeMeds.some((m) => m.dosageInstruction?.length);
+const DAY_NAMES: Record<string, string> = { mon: "Monday", tue: "Tuesday", wed: "Wednesday", thu: "Thursday", fri: "Friday", sat: "Saturday", sun: "Sunday" };
+const nowD = new Date();
+const todayStr = `${nowD.getFullYear()}-${String(nowD.getMonth() + 1).padStart(2, "0")}-${String(nowD.getDate()).padStart(2, "0")}`;
+const startedToday = activeMeds.filter((m) => (m.authoredOn ?? "").slice(0, 10) === todayStr);
 const bp = latestObs(observations, ["85354-9", "55284-4"]);
 const hr = latestObs(observations, ["8867-4"]);
 const temp = latestObs(observations, ["8310-5"]);
@@ -487,6 +518,77 @@ const tiles = [
         </li>
       ))}
     </ul>
+  )}
+</Section>
+
+<Section title="Medication schedule">
+  {activeMeds.length === 0 ? (
+    <p className="mt-2 opacity-70">No active medications.</p>
+  ) : !anyTiming ? (
+    <p className="mt-2 opacity-70">No schedule data recorded for these medications — timing wasn't captured on the orders.</p>
+  ) : (
+    <>
+    <div className="mt-2 flex justify-end print:hidden">
+  <button onClick={() => window.print()} className="rounded border px-3 py-1 text-sm">Print handout</button>
+</div>
+{startedToday.length > 0 && (
+  <div className="mt-3 rounded border border-green-700 bg-green-950 p-3">
+    <p className="font-medium">Started today</p>
+    <ul className="mt-1 space-y-1 text-sm">
+      {startedToday.map((m) => (
+        <li key={m.id}>{medLabel(m)}{medSig(m) ? ` — ${medSig(m)}` : ""}</li>
+      ))}
+    </ul>
+  </div>
+)}
+
+      {gridMeds.length > 0 && (
+        <table className="mt-3 w-full border-collapse text-sm">
+          <thead>
+            <tr>
+              <th className="border border-neutral-700 px-2 py-1 text-left">Medication</th>
+              <th className="border border-neutral-700 px-2 py-1">Morning</th>
+              <th className="border border-neutral-700 px-2 py-1">Noon</th>
+              <th className="border border-neutral-700 px-2 py-1">Evening</th>
+              <th className="border border-neutral-700 px-2 py-1">Bedtime</th>
+            </tr>
+          </thead>
+          <tbody>
+            {gridMeds.map((m) => (
+              <tr key={m.id}>
+                <td className="border border-neutral-700 px-2 py-1">
+                  {medLabel(m)}
+                  {m.reasonCode?.[0]?.text && <span className="block text-xs opacity-70">{m.reasonCode[0].text}</span>}
+                </td>
+                {DAY_SLOTS.map((s) => (
+                  <td key={s} className="border border-neutral-700 px-2 py-1 text-center">{medWhen(m).includes(s) ? medDose(m) : ""}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {weeklyMeds.length > 0 && (
+        <div className="mt-4">
+          <p className="font-medium">Weekly</p>
+          <ul className="mt-1 space-y-1 text-sm">
+            {weeklyMeds.map((m) => (
+              <li key={m.id}>{medLabel(m)} — {(medTiming(m)?.dayOfWeek ?? []).map((d: string) => DAY_NAMES[d] ?? d).join(", ")}{medSig(m) ? ` · ${medSig(m)}` : ""}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {otherMeds.length > 0 && (
+        <div className="mt-4">
+          <p className="font-medium">As needed & other timing</p>
+          <ul className="mt-1 space-y-1 text-sm">
+            {otherMeds.map((m) => (
+              <li key={m.id}>{medLabel(m)}{medSig(m) ? ` — ${medSig(m)}` : ""}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
   )}
 </Section>
 
