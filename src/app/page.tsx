@@ -168,8 +168,8 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-3xl p-8">
      <div className="mb-6 flex items-center justify-between">
-  <h1 className="text-2xl font-semibold">Patients</h1>
-   <Link href="/patients/new" className="rounded border px-4 py-2">
+  <h1 className="ext-2xl font-semibold text-mist-900">Patients</h1>
+   <Link href="/patients/new" className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700">
     New patient
    </Link>
   </div>
@@ -185,20 +185,20 @@ export default function Home() {
           autoFocus
           className="w-full rounded border px-3 py-2"
         />
-        <button type="submit" className="rounded border px-4 py-2">
+        <button type="submit" className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700">
           Search
         </button>
         {isSearching && (
           <button
             type="button"
             onClick={clearSearch}
-            className="rounded border px-4 py-2"
+            className="rounded-lg bg-white px-4 py-2 text-slate-700 ring-1 ring-slate-300 hover:bg-mist-50"
           >
             Clear
           </button>
         )}
       </form>
-      <p className="mb-6 mt-1 h-5 text-sm opacity-70">
+      <p className="mb-6 mt-1 h-5 text-sm text-slate-600">
         {preview.length > 0
           ? `Will search — ${preview.join(" · ")}`
           : "Formats: Last · Last, First · add a year or MM/DD/YYYY"}
@@ -224,14 +224,14 @@ export default function Home() {
             </thead>
             <tbody>
               {patients.map((p) => (
-                <tr key={p.id} className="border-b">
+                <tr key={p.id} className="border-b hover:bg-mist-50">
                   <td className="py-2 pr-4">
                     <div>
-                      <Link href={`/patients/${p.id}`} className="font-medium underline">
+                      <Link href={`/patients/${p.id}`} className="font-medium text-mist-700 underline">
                       {displayName(p)}
                       </Link>
                     </div>
-                    <div className="text-sm opacity-70">
+                    <div className="text-sm text-slate-600">
                       {displayAddress(p)}
                     </div>
                   </td>
@@ -254,14 +254,14 @@ export default function Home() {
             <button
               disabled={offset === 0}
               onClick={() => setOffset(Math.max(0, offset - PAGE_SIZE))}
-              className="rounded border px-3 py-1 disabled:opacity-40"
+              className="rounded-lg bg-white px-3 py-1 text-slate-700 ring-1 ring-slate-300 hover:bg-mist-50 disabled:opacity-40"
             >
               Previous
             </button>
             <button
               disabled={!hasNext}
               onClick={() => setOffset(offset + PAGE_SIZE)}
-              className="rounded border px-3 py-1 disabled:opacity-40"
+              className="rounded-lg bg-white px-3 py-1 text-slate-700 ring-1 ring-slate-300 hover:bg-mist-50 disabled:opacity-40"
             >
               Next
             </button>

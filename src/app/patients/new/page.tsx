@@ -98,13 +98,13 @@ export default function NewPatientPage() {
     return `${n?.family ?? ""}, ${(n?.given ?? []).join(" ")} · DOB ${p.birthDate ?? "?"}${addr}`;
   };
 
-  const inputCls = "w-full rounded border bg-white px-3 py-2 text-black";
-  const labelCls = "mb-1 block text-sm opacity-80";
+  const inputCls = "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900";
+  const labelCls = "mb-1 block text-sm text-slate-600";
 
   if (phase === "form") {
     return (
       <main className="mx-auto max-w-3xl p-8">
-        <h1 className="mb-6 text-2xl font-semibold">New patient</h1>
+        <h1 className="mb-6 text-2xl font-semibold text-mist-900">New patient</h1>
         <PatientForm
           initial={{
             ...EMPTY_FORM,
@@ -124,8 +124,8 @@ export default function NewPatientPage() {
     <Link href="/" className="mb-4 inline-block text-sm underline">
   ← Back to patients
 </Link>
-      <h1 className="mb-6 text-2xl font-semibold">New patient</h1>
-      <p className="mb-4 opacity-80">
+      <h1 className="mb-6 text-2xl font-semibold text-mist-900">New patient</h1>
+      <p className="mb-4 text-slate-600">
         First, search to make sure this patient doesn&apos;t already exist.
       </p>
 
@@ -161,7 +161,7 @@ export default function NewPatientPage() {
         <button
           type="submit"
           disabled={searching || !family || !given || !dob}
-          className="rounded border px-4 py-2 disabled:opacity-40"
+          className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700 disabled:opacity-40"
         >
           {searching ? "Searching…" : "Search"}
         </button>
@@ -181,7 +181,7 @@ export default function NewPatientPage() {
               <ul className="mb-4 list-inside list-disc">
                 {results.map((p) => (
                   <li key={p.id} className="py-1">
-  <Link href={`/patients/${p.id}`} className="underline">
+  <Link href={`/patients/${p.id}`} className="text-mist-700 underline">
     {describe(p)}
   </Link>
 </li>
@@ -192,7 +192,7 @@ export default function NewPatientPage() {
           )}
           <button
             onClick={() => setPhase("form")}
-            className="rounded border px-4 py-2"
+            className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700"
           >
             {results.length === 0
               ? "Create new patient"

@@ -551,22 +551,22 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
     <main className="mx-auto max-w-3xl p-6">
       <Link href={`/patients/${id}`} className="text-sm underline">← Back to chart</Link>
       <h1 className="mt-3 text-2xl font-bold">New order</h1>
-      <p className="mt-1 opacity-80">{name} · DOB {fmtDob(patient.birthDate)}
+      <p className="mt-1 text-slate-600">{name} · DOB {fmtDob(patient.birthDate)}
         · Order date {fmtDob(todayLocal())}
       </p>
       {realAllergies.length > 0 ? (
-        <p className="mt-3 rounded border border-red-500 bg-red-950 px-3 py-2 text-red-200">
+        <p className="mt-3 rounded border border-red-500 bg-red-50 px-3 py-2 text-red-800">
           ⚠ Allergies: {realAllergies.map((a) => allergyLabelA(a)).join(", ")}
         </p>
       ) : allergies.length > 0 ? (
-        <p className="mt-3 opacity-80">✓ No known allergies — documented</p>
+        <p className="mt-1 text-slate-600">✓ No known allergies — documented</p>
       ) : (
         <p className="mt-3 rounded border border-dashed border-amber-500 bg-amber-50 px-3 py-2 text-amber-800">
           ⚠ Allergies not recorded — verify before prescribing
         </p>
       )}
 
-      <h2 className="mt-6 text-lg font-semibold">1 · Drug {picked && <span className="text-green-400">✓</span>}</h2>
+      <h2 className="mt-6 text-lg font-semibold">1 · Drug {picked && <span className="text-green-600">✓</span>}</h2>
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="relative sm:col-span-3">
           <label className={labelCls}>Medication</label>
@@ -582,7 +582,7 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
   onFocus={() => setListOpen(true)}
 />
 {query.trim() && !picked && (
-  <p className="mt-1 text-xs text-gray-400">
+  <p className="mt-1 text-xs text-slate-500 ">
     Drug: {parsed.drugText || "—"}
     {parsed.strength != null && ` · Strength: ${parsed.strength}`}
     {parsed.pair && ` · Combo strength: ${parsed.pair[0]}/${parsed.pair[1]}`}
@@ -647,13 +647,13 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
           </select>
         </div>
   {picked && (
-  <div className="rounded border border-green-600 bg-green-950 px-3 py-2 sm:col-span-4">
-    <p className="text-green-300">{draft.rxDisplay} ✓</p>
-    <p className="text-xs opacity-70">RxNorm code {draft.rxcui}</p>
+  <div className="rounded border order-green-200 bg-green-50 px-3 py-2 sm:col-span-4">
+    <p className="text-green-800">{draft.rxDisplay} ✓</p>
+    <p className="text-xs text-green-700">RxNorm code {draft.rxcui}</p>
   </div>
 )}
 {allergyHit && (
-        <div className="mt-4 rounded border border-red-500 bg-red-950 px-3 py-2 sm:col-span-4 text-red-200">
+        <div className="mt-4 rounded border border-red-500 bg-red-50 px-3 py-2 sm:col-span-4 text-red-800">
             <p>
   ⚠ ALLERGY ALERT — {allergyLabelA(allergyHit.allergy)}
   {allergyReaction(allergyHit.allergy) ? ` (${allergyReaction(allergyHit.allergy)})` : ""}{" "}
@@ -673,7 +673,7 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
   </div>
   </div>
 )}
-<h2 className="mt-2 text-lg font-semibold sm:col-span-4">2 · Quantity {draft.dispenseQty && <span className="text-green-400">✓</span>}</h2>
+<h2 className="mt-2 text-lg font-semibold sm:col-span-4">2 · Quantity {draft.dispenseQty && <span className="text-green-600">✓</span>}</h2>
         <div className="sm:col-span-2">
           <label className={labelCls}>Dispense quantity</label>
           <div className="flex items-center gap-2">
@@ -688,7 +688,7 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
           <input className={inputCls} value={draft.refills} onChange={(e) => set({ refills: e.target.value })} placeholder="Type 0 if none" />
         </div>
         {daysSupply !== null && (wholeDays ? (
-  <p className="text-sm text-green-400 sm:col-span-4">= {daysSupply} days supply ✓</p>
+  <p className="text-sm text-green-600 sm:col-span-4">= {daysSupply} days supply ✓</p>
 ) : daysSupply <= 14 ? (
   <p className="text-sm opacity-70 sm:col-span-4">
     = {daysSupply.toFixed(1)} days supply at this rate. Round to{" "}
@@ -703,14 +703,14 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
   </p>
 ))}
 {qwDoses !== null && (
-  <p className="text-sm text-green-400 sm:col-span-4">= {qwDoses} weekly doses ({qwDoses} weeks)</p>
+  <p className="text-sm text-green-600 sm:col-span-4">= {qwDoses} weekly doses ({qwDoses} weeks)</p>
 )}
 {pens !== null && (Number.isInteger(pens) ? (
   <p className="text-sm opacity-70 sm:col-span-4">({dispN} mL = {pens} pens{pens % 5 === 0 ? ` = ${pens / 5} pack${pens === 5 ? "" : "s"}` : ""})</p>
 ) : (
   <p className="text-sm text-amber-400 sm:col-span-4">Pens are 3 mL each — use {Math.floor(pens) * 3} mL ({Math.floor(pens)} pens) or {Math.ceil(pens) * 3} mL ({Math.ceil(pens)} pens)</p>
 ))}
-        <h2 className="mt-2 text-lg font-semibold sm:col-span-4">3 · Directions {(freeform ? !!draft.customDirections?.trim() : !!draft.frequency) && <span className="text-green-400">✓</span>}</h2>
+        <h2 className="mt-2 text-lg font-semibold sm:col-span-4">3 · Directions {(freeform ? !!draft.customDirections?.trim() : !!draft.frequency) && <span className="text-green-600">✓</span>}</h2>
         <div className="sm:col-span-4">
   <div className="flex items-center justify-between">
   <label className={labelCls}>Sig</label>
@@ -803,18 +803,18 @@ const pens = isPen && dispN > 0 ? dispN / 3 : null;
         {showPayload ? "Hide" : "Show"} FHIR payload
       </button>
       {showPayload && (
-        <pre className="mt-3 overflow-auto rounded border border-neutral-800 p-3 text-xs">
+        <pre className="mt-3 overflow-auto rounded border border-slate-200 p-3 text-xs">
           {JSON.stringify(buildMedicationRequest(draft, id), null, 2)}
         </pre>
       )}
         {submitted ? (
-  <div className="mt-6 rounded border border-green-600 bg-green-950 px-3 py-2">
-    <p className="text-green-300">Order placed ✓</p>
+  <div className="mt-6 rounded border texborder-green-200 bg-green-50 px-3 py-2">
+    <p className="text-green-800">Order placed ✓</p>
     <Link href={`/patients/${id}`} className="text-sm underline">Back to chart to see it in the medication list →</Link>
     <button type="button" onClick={resetForm} className="mt-2 block text-sm underline">Place another order</button>
     </div>) : (
   <div className="mt-6">
-    <button type="button" disabled={submitting} onClick={submitOrder} className="rounded bg-white px-4 py-2 text-black disabled:opacity-50">{submitting ? "Placing order…" : "Submit order"}</button>
+    <button type="button" disabled={submitting} onClick={submitOrder} className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700 disabled:opacity-50">{submitting ? "Placing order…" : "Submit order"}</button>
     {submitError && <p className="mt-2 text-sm text-red-400">{submitError}</p>}
   </div>
 )}

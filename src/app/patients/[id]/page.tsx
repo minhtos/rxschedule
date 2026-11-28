@@ -163,7 +163,7 @@ type ChartPoint = { date: string; value: number };
 function TrendChart({ lines }: { lines: { color: string; unit: string; points: ChartPoint[] }[] }) {
   const all = lines.flatMap((l) => l.points.map((p) => p.value));
   if (all.length < 2) {
-    return <p className="text-sm opacity-70">Not enough readings to chart yet.</p>;
+    return <p className="text-sm text-slate-600">Not enough readings to chart yet.</p>;
   }
   const min = Math.min(...all);
   const max = Math.max(...all);
@@ -386,30 +386,30 @@ const tiles = [
 
   return (
     <main className="mx-auto max-w-5xl p-8">
-      <div className="sticky top-0 z-10 -mx-8 bg-black px-8 pb-4 dark:bg-black">
+      <div className="sticky top-0 z-10 -mx-8 border-b border-slate-200 bg-white px-8 pb-4 pt-4">
         <Link href="/" className="mb-2 inline-block text-sm underline">
           ← Back to patients
         </Link>
         <div className="flex items-start justify-between">
           <div>
-            <h1 className="text-2xl font-semibold">{displayName(patient)}</h1>
-<p className="mt-1 text-sm opacity-80">
+            <h1 className="text-2xl font-semibold text-mist-900">{displayName(patient)}</h1>
+<p className="mt-1 text-sm text-slate-600">
   {ageFrom(patient.birthDate)} · {patient.gender ?? ""} · DOB{" "}
   {displayDob(patient.birthDate)}
 </p>
 {(patientPhone(patient) || patientAddress(patient)) && (
-  <p className="mt-1 text-sm opacity-80">
+  <p className="mt-1 text-sm text-slate-600">
     {[patientPhone(patient), patientAddress(patient)].filter(Boolean).join(" · ")}
   </p>
 )}
           </div>
           <div className="flex gap-2">
-  <a href={`/patients/${id}/order`} className="rounded border px-4 py-2">New order</a>
-  <Link href={`/patients/${id}/edit`} className="rounded border px-4 py-2">Edit</Link>
+  <a href={`/patients/${id}/order`} className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700">New order</a>
+  <Link href={`/patients/${id}/edit`} className="rounded-lg bg-white px-4 py-2 text-slate-700 ring-1 ring-slate-300 hover:bg-mist-50">Edit</Link>
 </div>
         </div>
         {realAllergies.length > 0 && (
-          <div className="mt-4 rounded border border-red-500 bg-red-950 px-4 py-3 text-red-100">
+          <div className="mt-4 rounded-lg border-l-4 border-red-600 bg-red-50 px-4 py-3 text-red-800">
             <strong>⚠ Allergies:</strong>{" "}
             {realAllergies.map(allergyLabel).join(" · ")}
           </div>
@@ -429,25 +429,25 @@ const tiles = [
       <Section title="Vitals">
   <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-4">
     {tiles.map((t) => (
-      <div key={t.label} onClick={() => setOpenVital(openVital === t.key ? null : t.key)} className="cursor-pointer rounded border border-neutral-700 p-3">
-        <div className="text-xs uppercase tracking-wide opacity-60">{t.label}</div>
-        <div className={`mt-1 text-lg font-medium ${t.flagged ? "text-red-400" : ""}`}>
+      <div key={t.label} onClick={() => setOpenVital(openVital === t.key ? null : t.key)} className="cursor-pointer rounded-lg border border-slate-200 bg-white p-3 shadow-sm hover:bg-mist-50">
+        <div className="text-xs uppercase tracking-wide text-slate-500">{t.label}</div>
+        <div className={`mt-1 text-lg font-medium ${t.flagged ? "text-red-600" : ""}`}>
           {t.value}{t.flagged ? " ⚠" : ""}
         </div>
-        <div className="text-xs opacity-50">{t.date}</div>
+        <div className="text-xs text-slate-500">{t.date}</div>
       </div>
     ))}
   </div>
 
   {openVital && (
-  <div className="mt-4 rounded border border-neutral-700 p-4">
+  <div className="mt-4 rounded border border-slate-200 p-4">
     <div className="mb-3 flex items-center gap-2">
       <span className="font-semibold">{TREND_TITLES[openVital]}</span>
       <button type="button" onClick={() => setTrendMode("table")} className={`rounded border px-2 py-1 text-sm ${trendMode === "table" ? "bg-neutral-700" : ""}`}>Table</button>
       <button type="button" onClick={() => setTrendMode("graph")} className={`rounded border px-2 py-1 text-sm ${trendMode === "graph" ? "bg-neutral-700" : ""}`}>Graph</button>
     </div>
     {(isBp ? bpRows.length : singleRows.length) === 0 ? (
-      <p className="text-sm opacity-70">No readings recorded.</p>
+      <p className="text-sm text-slate-600">No readings recorded.</p>
     ) : trendMode === "table" ? (
       <ul className="space-y-1 text-sm">
         {(isBp ? bpRows : singleRows).map((r: any, i: number) => (
@@ -466,7 +466,7 @@ const tiles = [
 </Section>
       <Section title="Past visits">
   {encounters.length === 0 && (
-    <p className="opacity-70">No visits on file.</p>
+    <p className="text-slate-600">No visits on file.</p>
   )}
   <ul className="space-y-2">
     {encounters.map((en) => (
@@ -491,11 +491,11 @@ const tiles = [
 </Section>
 <Section title="Conditions">
     {visibleConditions.length === 0 ? (
-    <p className="mt-2 opacity-70">No active conditions on file.</p>
+    <p className="mt-2 text-slate-600">No active conditions on file.</p>
   ) : (
     <ul className="mt-3 space-y-2">
       {visibleConditions.map((c) => (
-        <li key={c.id} className="rounded border border-neutral-700 p-3">
+        <li key={c.id} className="rounded border border-slate-200 p-3">
           {conditionLabel(c)}
           {conditionOnset(c) && (
             <span className="opacity-60"> · since {conditionOnset(c)}</span>
@@ -508,13 +508,13 @@ const tiles = [
 
 <Section title="Medications">
     {activeMeds.length === 0 ? (
-    <p className="mt-2 opacity-70">No active medications.</p>
+    <p className="mt-2 text-slate-600">No active medications.</p>
   ) : (
     <ul className="mt-3 space-y-2">
       {activeMeds.map((m) => (
-        <li key={m.id} className="rounded border border-neutral-700 p-3">
+        <li key={m.id} className="rounded border border-slate-200 p-3">
           <div>{medLabel(m)}</div>
-          {medSig(m) && <div className="text-sm opacity-70">{medSig(m)}</div>}
+          {medSig(m) && <div className="text-sm text-slate-600">{medSig(m)}</div>}
         </li>
       ))}
     </ul>
@@ -523,16 +523,16 @@ const tiles = [
 
 <Section title="Medication schedule">
   {activeMeds.length === 0 ? (
-    <p className="mt-2 opacity-70">No active medications.</p>
+    <p className="mt-2 text-slate-600">No active medications.</p>
   ) : !anyTiming ? (
-    <p className="mt-2 opacity-70">No schedule data recorded for these medications — timing wasn't captured on the orders.</p>
+    <p className="mt-2 text-slate-600">No schedule data recorded for these medications — timing wasn't captured on the orders.</p>
   ) : (
     <>
     <div className="mt-2 flex justify-end print:hidden">
-  <button onClick={() => window.print()} className="rounded border px-3 py-1 text-sm">Print handout</button>
+  <button onClick={() => window.print()} className="rounded-lg bg-white px-3 py-1 text-sm text-slate-700 ring-1 ring-slate-300 hover:bg-mist-50">Print handout</button>
 </div>
 {startedToday.length > 0 && (
-  <div className="mt-3 rounded border border-green-700 bg-green-950 p-3">
+  <div className="mt-3 rounded-lg border border-green-200 bg-green-50 p-3 text-green-800">
     <p className="font-medium">Started today</p>
     <ul className="mt-1 space-y-1 text-sm">
       {startedToday.map((m) => (
@@ -546,22 +546,22 @@ const tiles = [
         <table className="mt-3 w-full border-collapse text-sm">
           <thead>
             <tr>
-              <th className="border border-neutral-700 px-2 py-1 text-left">Medication</th>
-              <th className="border border-neutral-700 px-2 py-1">Morning</th>
-              <th className="border border-neutral-700 px-2 py-1">Noon</th>
-              <th className="border border-neutral-700 px-2 py-1">Evening</th>
-              <th className="border border-neutral-700 px-2 py-1">Bedtime</th>
+              <th className="border border-slate-200 px-2 py-1 text-left">Medication</th>
+              <th className="border border-slate-200 px-2 py-1">Morning</th>
+              <th className="border border-slate-200 px-2 py-1">Noon</th>
+              <th className="border border-slate-200 px-2 py-1">Evening</th>
+              <th className="border border-slate-200 px-2 py-1">Bedtime</th>
             </tr>
           </thead>
           <tbody>
             {gridMeds.map((m) => (
               <tr key={m.id}>
-                <td className="border border-neutral-700 px-2 py-1">
+                <td className="border border-slate-200 px-2 py-1">
                   {medLabel(m)}
-                  {m.reasonCode?.[0]?.text && <span className="block text-xs opacity-70">{m.reasonCode[0].text}</span>}
+                  {m.reasonCode?.[0]?.text && <span className="block text-xs text-slate-600">{m.reasonCode[0].text}</span>}
                 </td>
                 {DAY_SLOTS.map((s) => (
-                  <td key={s} className="border border-neutral-700 px-2 py-1 text-center">{medWhen(m).includes(s) ? medDose(m) : ""}</td>
+                  <td key={s} className="border border-slate-200 px-2 py-1 text-center">{medWhen(m).includes(s) ? medDose(m) : ""}</td>
                 ))}
               </tr>
             ))}
@@ -594,18 +594,18 @@ const tiles = [
 
 <Section title="Medication history" defaultOpen={false}>
   {medRequests.length === 0 ? (
-    <p className="mt-2 opacity-70">No medication history.</p>
+    <p className="mt-2 text-slate-600">No medication history.</p>
   ) : (
     <ul className="mt-3 space-y-2">
       {medRequests.map((m) => (
-        <li key={m.id} className="rounded border border-neutral-700 p-3">
+        <li key={m.id} className="rounded border border-slate-200 p-3">
           <div>
             {medLabel(m)}
             <span className="ml-2 rounded border px-2 py-0.5 text-xs uppercase">
               {m.status ?? "unknown"}
             </span>
           </div>
-          <div className="text-sm opacity-70">
+          <div className="text-sm text-slate-600">
             {m.authoredOn ? `Ordered ${displayDob(m.authoredOn.slice(0, 10))}` : ""}
             {medSig(m) ? ` · ${medSig(m)}` : ""}
           </div>

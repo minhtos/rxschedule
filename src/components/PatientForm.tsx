@@ -74,8 +74,8 @@ export default function PatientForm({
 };
 
 
-  const inputCls = "w-full rounded border bg-white px-3 py-2 text-black";
-  const labelCls = "mb-1 block text-sm opacity-80";
+  const inputCls = "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900";
+  const labelCls = "mb-1 block text-sm text-slate-600";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -113,8 +113,8 @@ export default function PatientForm({
         </div>
       </div>
 
-      <fieldset className="space-y-4 rounded border p-4">
-        <legend className="px-1 text-sm opacity-80">
+      <fieldset className="space-y-4 rounded-lg border border-slate-200 p-4">
+        <legend className="px-1 text-sm text-slate-600">
           Address (optional — shown in the patient list)
         </legend>
         <div>
@@ -146,7 +146,7 @@ export default function PatientForm({
       <button
         type="submit"
         disabled={saving}
-        className="rounded border px-4 py-2 disabled:opacity-40"
+        className="rounded-lg bg-mist-600 px-4 py-2 text-white hover:bg-mist-700 disabled:opacity-40"
       >
         {saving ? "Saving…" : submitLabel}
       </button>
